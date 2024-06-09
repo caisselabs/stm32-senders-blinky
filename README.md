@@ -6,13 +6,11 @@ the code seen in my C++Now 2024 Keynote: [Employing Senders and Receivers to Tam
 
 The dev board is a STM32 NUCLEO-L432KC which has an STM32L432KC device.
 
-# License
-
-This project is released under the Boost Software License 1.0 ([BSL 1.0](https://www.boost.org/LICENSE_1_0.txt)) with the exception of the following files:
-
- - `startup/startup_gcc.s` is from the Arm gcc release and has been modified to include additional interrupt vectors for the STM32L432KC. See file's header for license information.
- - `ldscripts/*` - files in this directory were linker scripts that originated with Arm gcc compiler and have been modified for the dev board in use.
- - `openocd/stm32_nucleo_l4.cfg` - GPL 2.0
+> [!Note]
+> There are many ways to accomplish the tasks on this page such as loading flash,
+> configuring cmake, and envoking builds. The steps listed aren't event the "best"
+> methods. Hopefully they provide an easy-enough experience for those new to the tools.
+> For those with experience, please use your prefered techniques.
 
 
 # Toolchain
@@ -65,9 +63,16 @@ The above sequence will load the symbols into the debugger, the image into flash
 
 As mentioned above, openocd is being used for a lot of direct access tasks.
 
+Start running the `openocd` server for gdb to attach:
+
+```bash
+openocd -f openocd/st_nucleo_l4.cfg
+```
+
+
 ### Mac Instructions
 
-These are the things I did to make it work on a Mac.
+These are the things I did to make `openocd` work on a Mac.
 
 - Using brew, install openocd
 
@@ -95,12 +100,6 @@ For me, the path was:
 openocd -f /usr/local/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/board/st_nucleo_l4.cfg
 ```
 
-Optionally, I have included the configuration I have been using in the repository:
-
-```bash
-openocd -f openocd/st_nucleo_l4.cfg
-```
-
 
 # Building
 
@@ -116,4 +115,14 @@ The preset will generate the cmake files into the `build` directory and use the 
 ninja -C build
 ```
 
+This will result in the elf file `build/blinky` which can be loaded onto the target using gdb as explained above.
+
+
+# License
+
+This project is released under the Boost Software License 1.0 ([BSL 1.0](https://www.boost.org/LICENSE_1_0.txt)) with the exception of the following files:
+
+ - `startup/startup_gcc.s` is from the Arm gcc release and has been modified to include additional interrupt vectors for the STM32L432KC. See file's header for license information.
+ - `ldscripts/*` - files in this directory were linker scripts that originated with Arm gcc compiler and have been modified for the dev board in use.
+ - `openocd/stm32_nucleo_l4.cfg` - GPL 2.0. Originated from `openocd` distribution.
 
