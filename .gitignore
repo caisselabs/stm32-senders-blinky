@@ -1,0 +1,13 @@
+/build
+/cmake-build-*
+/venv
+/.vscode
+/.idea
+/.cache
+/.DS_Store
+.clang-format
+.clang-tidy
+.cmake-format.yaml
+CMakePresets.json
+*~
+
