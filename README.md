@@ -2,13 +2,13 @@
 
 This project simply blinks an LED on a dev board using senders and receivers. The intent
 is to demonstrate a very simply project with a blinky led. This project matches some of
-the code seen in my C++Now 2024 Keynote: Employing Senders and Receivers to Tame Concurrency in C++ Embedded Systems.
+the code seen in my C++Now 2024 Keynote: [Employing Senders and Receivers to Tame Concurrency in C++ Embedded Systems](https://www.youtube.com/watch?v=wHmvszK8WCE).
 
 The dev board is a STM32 NUCLEO-L432KC which has an STM32L432KC device.
 
 # License
 
-This project is released under the Boost Software License 1.0 ([BSL 1.0](https://www.boost.org/LICENSE_1_0.txt) with the exception of the following files:
+This project is released under the Boost Software License 1.0 ([BSL 1.0](https://www.boost.org/LICENSE_1_0.txt)) with the exception of the following files:
 
  - `startup/startup_gcc.s` is from the Arm gcc release and has been modified to include additional interrupt vectors for the STM32L432KC. See file's header for license information.
  - `ldscripts/*` - files in this directory were linker scripts that originated with Arm gcc compiler and have been modified for the dev board in use.
