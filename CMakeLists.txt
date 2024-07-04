@@ -14,12 +14,12 @@ project(
         "blinky led using senders on an STM32 dev board")
 
 include(cmake/get_cpm.cmake)
-cpmaddpackage("gh:intel/cicd-repo-infrastructure#main")
+cpmaddpackage("gh:intel/cicd-repo-infrastructure#dev")
 
-add_versioned_package("gh:intel/cpp-std-extensions#f67b432")
-add_versioned_package("gh:intel/cpp-baremetal-concurrency#659771e")
-add_versioned_package("gh:intel/cpp-baremetal-senders-and-receivers#66be17b")
-add_versioned_package("gh:intel/generic-register-operation-optimizer#b59207e")
+add_versioned_package("gh:intel/cpp-std-extensions#a51e2bf")
+add_versioned_package("gh:intel/cpp-baremetal-concurrency#030f9f3")
+add_versioned_package("gh:intel/cpp-baremetal-senders-and-receivers#768da1c")
+add_versioned_package("gh:intel/generic-register-operation-optimizer#835b88c")
 add_versioned_package("gh:caisselabs/stm32-groov#f1f39f7")
 
 
@@ -33,3 +33,9 @@ add_executable(blinky
 target_compile_definitions(blinky PUBLIC SIMULATE_FREESTANDING)
 target_link_libraries_system(blinky PUBLIC async stm32-groov)
 
+
+# this target is used to baseline compile time
+add_executable(baseline
+	startup/startup_gcc.s
+	src/baseline.cpp
+      )
