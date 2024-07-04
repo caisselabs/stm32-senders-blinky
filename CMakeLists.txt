@@ -34,8 +34,23 @@ target_compile_definitions(blinky PUBLIC SIMULATE_FREESTANDING)
 target_link_libraries_system(blinky PUBLIC async stm32-groov)
 
 
-# this target is used to baseline compile time
+# --------------------------------------------------
+# --------------------------------------------------
+# these target is used to baseline compile time
 add_executable(baseline
 	startup/startup_gcc.s
 	src/baseline.cpp
       )
+
+
+add_executable(baseline_sender
+	startup/startup_gcc.s
+	src/baseline_sender.cpp
+	src/baseline_setup.cpp
+      )
+# the detection used by baremetal concurrency results in determining
+# that this target is hosted. Just force with define.
+target_compile_definitions(baseline_sender PUBLIC SIMULATE_FREESTANDING)
+target_link_libraries_system(baseline_sender PUBLIC async)
+# --------------------------------------------------
+# --------------------------------------------------
